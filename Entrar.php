@@ -91,9 +91,7 @@
                     <?php 
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
-                     <li class="dropdown">
-                      <a class="dropwdown" href="#Entrar"> Iniciar Sesion</a>
-                     </li>
+                    
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
                       </li>

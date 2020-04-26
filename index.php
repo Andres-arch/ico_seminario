@@ -81,6 +81,7 @@
                       <ul class="dropdown-menu">
                         <li><a href="Suscribirse.php">Suscribirse</a></li>
                         <li><a href="Entrar.php">Iniciar Sesion</a></li>
+                        <li><a href="tabla_productos_2.php">Ver Catalogo de productos</a></li>
                         
                       
 
@@ -104,14 +105,23 @@
                          ?>
                      <li class="dropdown">
                       <a class="dropwdown" href="#Entrar"> Usuario</a>
+                      
+
                      </li>
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
                       </li>
                        <?php }?>
 
+
+                       <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                         ?>
                        <li class="dropdown">
                       <a href="Cerrar_sesion.php"> Salir </i></a>
+                      <?php 
+                        }
+                        ?>
                       
                         
                       
