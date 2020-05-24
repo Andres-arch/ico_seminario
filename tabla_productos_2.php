@@ -76,16 +76,58 @@
                   <ul class="nav topnav">
                     <li class="active">
                       <a href="index.php">Inicio</a>
+                      
                        
                       <?php 
                         if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
                          ?>
                       <li class="dropdown">
                       <a href="tabla_compras.php"> Carro de Compras </i></a>
                       </li>
                   <?php 
                         }
+                      }
                         ?>
+                  
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Vendedor"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_compastotales_ven.php"> Compras Totales </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_comprastotales.php"> Historial de compras </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                    
+                   <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Vendedor"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_productos_3.php"> Articulos vendedor </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                        
 
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
@@ -96,6 +138,8 @@
                     <li class="dropdown">
                     </li>
 
+                    
+
                     <ul class="nav topnav">
                     <li class="active">
                     </li>
@@ -104,7 +148,7 @@
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
                      <li class="dropdown">
-                      <a class="dropwdown" href="Entrar.php"> Usuario</a>
+                      <a class="dropwdown" href="Entrar.php"> Iniciar sesion</a>
                      </li>
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
@@ -126,6 +170,8 @@
                       
                        </li>
 
+
+                     
 
                     
                     
@@ -182,8 +228,19 @@
   <script src="js/custom.js"></script>
 
   <center>
+  <?php 
+          if(isset($_SESSION['u_rol'])){
+
+          
+          if(($_SESSION['u_rol']=="Vendedor")){
+                         ?>
+                        
       <a href="Formulario_productos.php"><Button>Insertar Producto</Button></a>
-      
+    <?php
+    
+  }}
+
+  ?>
     </center>
 
     <br>
@@ -194,11 +251,11 @@
         <tr>
         <tr>
         <th width="10%">Codigo</th>
-        <th width="15%">Descripción</th>
-        <th width="10%">Precio</th>
-        <th width="10%">Existencia</th>
-        <th width="35%">Imagen</th>
-        <th width="15%">Acciones</th>
+        <th width="10%">Descripción</th>
+        <th width="5%">Precio</th>
+        <th width="2%">Existencia</th>
+        <th width="15%">Imagen</th>
+        <th width="5%">Acciones</th>
         </tr>
 
         
@@ -226,8 +283,7 @@
                           ?>
 
 
- <a href="actualizar_Productos.php?Codigo=<?php echo $consulta['Codigo'];?>"><Button>Actualizar</Button></a>
-              <a href="eliminar_proceso_Productos.php?Codigo=<?php echo $consulta['Codigo'];?>"><button>Eliminar</button></a>
+ 
 
 
 <?php  }else{?>

@@ -134,7 +134,7 @@
                 
                  <div class="form-group">
                  <label for='Pass'>Contraseña</label>
-                 <input type="Pass" name="txtPass" class="form-control" id="Pass">
+                 <input type="password" name="txtPass" class="form-control" id="Pass">
                  </div>    
 
                 <button type="submit">Iniciar Sesion</button>

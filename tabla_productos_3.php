@@ -1,26 +1,17 @@
-<?php
+<?php 
     session_start();
-     include("abrir_conexion_Suscribirse.php");
-     if (isset($_GET['compra'])){
-      $compra = $_GET['compra'];
-      $tabla_db= 'compra';
+        
+      include("abrir_conexion_Suscribirse.php");
+      
+      
+    
+    ?>
+<!DOCTYPE html>
+<html lang="en">
 
-    $sql = "UPDATE $tabla_db SET Estatus='Comprado'  WHERE ID_vendedor= '$compra'";
-    $query = mysqli_query($conexion,$sql);
-
-    if ($query) {
-        echo "Compra exitosa. <a href='tabla_compras.php'>Regresar</a>";
-    } else {
-        echo "Lo sentimos su compra no fue comnpletada, el registro falló. Por favor, regrese y vuelva a intentarlo. <a href='tabla_compras.php'>Regresar</a>";
-    }
-    //------------------------------------------------
-     }
-?>
-   <html>
-
-   <head>
-    <meta charset="utf-8">
-    <title>Beatus Ille - Multipurpose bootstrap site template</title>
+<head>
+  <meta charset="utf-8">
+  <title>Beatus Ille - Multipurpose bootstrap site template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Your page description here" />
   <meta name="author" content="" />
@@ -42,7 +33,13 @@
   <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
   <link rel="shortcut icon" href="ico/favicon.png" />
 
-  </head>
+  <!-- =======================================================
+    Theme Name: Remember
+    Theme URL: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
 
 <body>
   <div id="wrapper">
@@ -78,15 +75,44 @@
                   <ul class="nav topnav">
                     <li class="active">
                       <a href="index.php">Inicio</a>
-                    </li>
+                       
+                      <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_compras.php"> Carro de Compras </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+                  
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Vendedor"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_compastotales_ven.php"> Compras Totales </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
 
-                    <li class="dropwdown">
-                      <a href="tabla_productos_2.php">Catalogo de productos</a>
-                    </li>
-                    <li class="dropdown">
+                 
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
+                         ?>
+                      <li class="dropdown">
                       <a href="tabla_comprastotales.php"> Historial de compras </i></a>
                       </li>
-                   
+                  <?php 
+                        }
+                      }
+                        ?>
+
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
@@ -99,11 +125,12 @@
                     <ul class="nav topnav">
                     <li class="active">
                     </li>
+
                     <?php 
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
                      <li class="dropdown">
-                      <a class="dropwdown" href="#Entrar"> Iniciar Sesion</a>
+                      <a class="dropwdown" href="Entrar.php"> Iniciar sesion</a>
                      </li>
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
@@ -111,9 +138,15 @@
                        <?php }?>
 
 
-                     
+                    <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                         ?>
                       <li class="dropdown">
                       <a href="Cerrar_sesion.php"> Salir </i></a>
+                      </li>
+                         <?php 
+                        }
+                        ?>
                       
                         
                       
@@ -131,8 +164,7 @@
           </div>
         </div>
       </div>
-
-      </header>
+    </header>
     <!-- end header -->
 
    
@@ -175,52 +207,96 @@
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
 
-  <br>
- 
- <center>
-   <table border="2">
- </center>
-     <tr>
-     <tr>
-     <th width="10%">Folio de compra</th>
-     <th width="15%">Producto</th>
-     <th width="15%">Precio</th>
-     <th width="10%">Imagen</th>
-     
-     </tr>
+  <center>
+  <?php 
+          if(isset($_SESSION['u_rol'])){
+
+          
+          if(($_SESSION['u_rol']=="Vendedor")){
+                         ?>
+                        
+      <a href="Formulario_productos.php"><Button>Insertar Producto</Button></a>
+    <?php
     
-     <?php
-        $usuario=$_SESSION['u_sesion'];
-         $resultados = mysqli_query($conexion,"SELECT Codigo,Descripcion, Precio, Imagen FROM compra INNER JOIN productos ON compra.Codigo_producto= productos.Codigo WHERE compra.Estatus='Pendiente' and compra.ID_vendedor='$usuario'");
+  }}
+
+  ?>
+    </center>
+
+    <br>
+ 
+    <center>
+      <table border="2">
+    </center>
+        <tr>
+        <tr>
+        <th width="10%">Codigo</th>
+        <th width="15%">Descripción</th>
+        <th width="10%">Precio</th>
+        <th width="10%">Existencia</th>
+        <th width="15%">Vendedor</th>
+        <th width="25%">Imagen</th>
+        <th width="15%">Acciones</th>
+        </tr>
+
+        
+      <?php
+         $tabla_db = "productos";
+         $campos = "*";
+         $usuario =$_SESSION['u_sesion'];
+         $resultados = mysqli_query($conexion,"SELECT $campos FROM $tabla_db WHERE Vendedor='$usuario'");
           while($consulta = mysqli_fetch_array($resultados))
       {?>
 
-<tr>
+
+    <tr>
           <td><?php echo $consulta['Codigo'];?></td>
           <td><?php echo $consulta['Descripcion'];?></td>
           <td><?php echo $consulta ['Precio'];?></td>
+          <td><?php echo $consulta ['Existencia'];?></td>
+          <td><?php echo $consulta ['Vendedor'];?></td>
           <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="300px"></center></td>
+          
           <td>
-</tr>
-  
+             <center>
+             <?php
+                        if(isset($_SESSION['u_rol'])){
+                          
+                          if($_SESSION['u_rol']=="Vendedor"){
+                          
+                          ?>
+
+
+ <a href="actualizar_Productos.php?Codigo=<?php echo $consulta['Codigo'];?>"><Button>Actualizar</Button></a>
+              <a href="eliminar_proceso_Productos.php?Codigo=<?php echo $consulta['Codigo'];?>"><button>Eliminar</button></a>
+
+
+<?php  }else{?>
+  <a href="proceso_compra.php?Codigo=<?php echo $consulta['Codigo'];?>&usuario=<?php echo  $_SESSION['u_sesion'];?>"><button>Comprar</button></a>
 <?php
+}
+}
+                         ?>
+             </center> 
+         
+    </td>
+          
+    </tr>
+
+    
+
+    <?php
             }
             include("cerrar_conexion_Suscribirse.php");
            ?>
         </table>
              </center>
-
-             <center>
-             <a href="?compra=<?php echo $usuario;?>"><img src="https://www.adguer.com/wp-content/uploads/2016/10/boton-paypal-compra.png" width="300"></a>
-            </center>
       
     </body>
-
-    
 </html>
 
+     
 
+</body>
 
-    
-
-    
+</html>

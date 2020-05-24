@@ -79,8 +79,9 @@
                     <li class="dropdown">
                       <a href="#">Opciones <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
-                        <li><a href="Suscribirse.php">Suscribirse</a></li>
-                        <li><a href="Entrar.php">Iniciar Sesion</a></li>
+    
+                        <li><a href="Suscribirse.php">Suscribirse</a>
+ 
                         <li><a href="tabla_productos_2.php">Ver Catalogo de productos</a></li>
                         
                       
@@ -104,7 +105,7 @@
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
                      <li class="dropdown">
-                      <a class="dropwdown" href="#Entrar"> Usuario</a>
+                      <a href="Entrar.php" href="#Entrar"> Iniciar sesion</a>
                       
 
                      </li>
@@ -300,8 +301,8 @@
                       <figcaption>
                         <h3>Amazing Fantasy #1. Valuado en $20,000</h3>
                         <p>
-                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-zoom-in icon-circled icon-bglight icon-2x active"></i></a>
-                          <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x active"></i></a>
+                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class=></i></a>
+                          <a href="#"><i class=></i></a>
                         </p>
                       </figcaption>
                     </figure>
@@ -314,8 +315,8 @@
                       <figcaption>
                         <h3>Pianoforte aleman, valuado en $46,000</h3>
                         <p>
-                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-zoom-in icon-circled icon-bglight icon-2x active"></i></a>
-                          <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x active"></i></a>
+                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class=></i></a>
+                          <a href="#"><i class=></i></a>
                         </p>
                       </figcaption>
                     </figure>
@@ -328,8 +329,8 @@
                       <figcaption>
                         <h3>Máscara de Pakal. Valuada en $1000,000</h3>
                         <p>
-                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-zoom-in icon-circled icon-bglight icon-2x active"></i></a>
-                          <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x active"></i></a>
+                          <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class=></i></a>
+                          <a href="#"><i class=></i></a>
                         </p>
                       </figcaption>
                     </figure>

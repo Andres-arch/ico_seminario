@@ -1,21 +1,26 @@
-<?php 
-   include("abrir_conexion_Suscribirse.php");
-   
-    
+<?php
     session_start();
+     include("abrir_conexion_Suscribirse.php");
+     if (isset($_GET['compra'])){
+      $compra = $_GET['compra'];
+      $tabla_db= 'compra';
 
+    $sql = "UPDATE $tabla_db SET Estatus='Comprado'  WHERE ID_vendedor= '$compra'";
+    $query = mysqli_query($conexion,$sql);
 
+    if ($query) {
+        echo "Compra exitosa. <a href='tabla_compras.php'>Regresar</a>";
+    } else {
+        echo "Lo sentimos su compra no fue comnpletada, el registro falló. Por favor, regrese y vuelva a intentarlo. <a href='tabla_compras.php'>Regresar</a>";
+    }
+    //------------------------------------------------
+     }
+?>
+   <html>
 
-  ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<!DOCTYPE php>
-<php lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <title>Remember - Multipurpose bootstrap site template</title>
+   <head>
+    <meta charset="utf-8">
+    <title>Beatus Ille - Multipurpose bootstrap site template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Your page description here" />
   <meta name="author" content="" />
@@ -30,17 +35,16 @@
   <!-- Theme skin -->
   <link id="t-colors" href="color/default.css" rel="stylesheet" />
 
- 
-  <!-- =======================================================
-    Theme Name: Remember
-    Theme URL: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
-</head>
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
+  <link rel="shortcut icon" href="ico/favicon.png" />
+
+  </head>
 
 <body>
-
   <div id="wrapper">
     <!-- start header -->
     <header>
@@ -48,16 +52,20 @@
         <div class="container">
           <div class="row">
             <div class="span6">
-
+              <ul class="topmenu">
+  
+              </ul>
             </div>
             <div class="span6">
-
+             
             </div>
           </div>
         </div>
       </div>
       <div class="container">
-      <div class="row nomargin">
+
+
+        <div class="row nomargin">
           <div class="span4">
             <div class="logo">
               <h1><a href="index.php"><i class="icon-tint"></i> Beatus Ille</a></h1>
@@ -71,17 +79,7 @@
                     <li class="active">
                       <a href="index.php">Inicio</a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#">Opciones <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="Suscribirse.php">Suscribirse</a></li>
-                        
-                        <li><a href="Entrar.php">Iniciar sesion</a></li>
-                        
-                      
-
-                      </ul>
-                    </li>
+                   
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
@@ -94,14 +92,11 @@
                     <ul class="nav topnav">
                     <li class="active">
                     </li>
-
                     <?php 
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
                      <li class="dropdown">
-                      <a href="Entrar.php" href="#Entrar"> Iniciar sesion</a>
-                      
-
+                      <a class="dropwdown" href="#Entrar"> Iniciar Sesion</a>
                      </li>
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
@@ -109,14 +104,10 @@
                        <?php }?>
 
 
-                      <?php 
-                        if(isset($_SESSION['u_sesion'])){
-                         ?>
+                     
                       <li class="dropdown">
                       <a href="Cerrar_sesion.php"> Salir </i></a>
-                      <?php 
-                        }
-                        ?>
+                      
                         
                       
                        </li>
@@ -128,62 +119,30 @@
                 </nav>
                 
               </div>
-              
               <!-- end navigation -->
             </div>
           </div>
         </div>
       </div>
-    </header>
+
+      </header>
     <!-- end header -->
 
-    <section id="inner-headline">
-      <div class="container">
-        <div class="row">
-          <div class="span4">
-            <div class="inner-heading">
-              <h2>¿Quienes somos?</h2>
-            </div>
-          </div>
-          <div class="span8">
-            <ul class="breadcrumb">
+   
 
- 
-            </ul>
-          </div>
-        </div>
-      </div>
+    </div>
     </section>
 
-    <section id="content">
-      <div class="container">
-        <div class="row">
-
-
-            <h5>Somos una casa de empeño centrada en las antiguedades que busca desarrollarse como un centro
-              de intercambio para todos nuestros usuarios, dandole el valor que sus productos merecen. Permitiendole a nuestros compradores que 
-              obtengan antiguedades y productos de gran valor histórico, simbólico o de alguna otra índole. 
-            </h5>
-          </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="span3">
-
-              </div>
-            </div>
-          </div>
-
-               
-              </div>
-            </div>
-          </div>
-          <div class="span3">
-           
             <div class="span6">
-             
+              <div class="credits">
+                <!--
+                  All the links in the footer should remain intact.
+                  You can delete the links only if you purchased the pro version.
+                  Licensing information: https://bootstrapmade.com/license/
+                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Remember
+                -->
+        
+              </div>
             </div>
           </div>
         </div>
@@ -209,6 +168,46 @@
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
 
-</body>
+  <br>
+  <center>
+  <h4>Antiguedades Compradas</h4>
+  </center>
+ <center>
+   <table border="2">
+ </center>
+     <tr>
+     <tr>
+     <th width="10%">Folio de compra</th>
+     <th width="15%">Producto</th>
+     <th width="15%">Precio</th>
+     <th width="10%">Imagen</th>
+     
+     </tr>
+    
+     <?php
+        $usuario=$_SESSION['u_sesion'];
+         $resultados = mysqli_query($conexion,"SELECT Codigo,Descripcion, Precio, Imagen FROM compra INNER JOIN productos ON compra.Codigo_producto= productos.Codigo WHERE compra.Estatus='Comprado' and compra.ID_vendedor='$usuario'");
+          while($consulta = mysqli_fetch_array($resultados))
+      {?>
 
-</php>
+<tr>
+          <td><?php echo $consulta['Codigo'];?></td>
+          <td><?php echo $consulta['Descripcion'];?></td>
+          <td><?php echo $consulta ['Precio'];?></td>
+          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="300px"></center></td>
+          <td>
+</tr>
+  
+<?php
+            }
+            include("cerrar_conexion_Suscribirse.php");
+           ?>
+        </table>
+             </center>
+
+             
+      
+    </body>
+
+    
+</html>

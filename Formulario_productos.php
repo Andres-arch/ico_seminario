@@ -125,6 +125,9 @@
                     <input type="file" name="txtImagen" class="form-control" id="Imagen">
                       </div>
 
+                
+                
+
               <button type="submit">Subir objeto</button>
                 <a href="index.php"> <input type="button" value="regresar"> 
 
