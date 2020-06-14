@@ -76,6 +76,8 @@
                     <li class="active">
                       <a href="index.php">Inicio</a>
                     </li>
+
+                    
                     <li class="dropdown">
                       <a href="#">Opciones <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">

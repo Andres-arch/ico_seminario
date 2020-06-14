@@ -75,7 +75,9 @@
                   <ul class="nav topnav">
                     <li class="active">
                       <a href="index.php">Inicio</a>
-                       
+                      <li class="dropwdown">
+                      <a href="tabla_productos_2.php">Catalogo de productos</a>
+                    </li>
                       <?php 
                         if(isset($_SESSION['u_sesion'])){
                           if($_SESSION['u_rol']=="Comprador"){
@@ -87,13 +89,17 @@
                         }
                       }
                         ?>
+
+                    <li class="dropdown">
+                      <a href="tabla_productos_3.php"> Articulos vendedor </i></a>
+                    </li>
                   
                   <?php 
                         if(isset($_SESSION['u_sesion'])){
                           if($_SESSION['u_rol']=="Vendedor"){
                          ?>
                       <li class="dropdown">
-                      <a href="tabla_compastotales_ven.php"> Compras Totales </i></a>
+                      <a href="tabla_compastotales_ven.php"> Historial de ventas </i></a>
                       </li>
                   <?php 
                         }
@@ -255,7 +261,7 @@
           <td><?php echo $consulta ['Precio'];?></td>
           <td><?php echo $consulta ['Existencia'];?></td>
           <td><?php echo $consulta ['Vendedor'];?></td>
-          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="300px"></center></td>
+          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="100px"></center></td>
           
           <td>
              <center>

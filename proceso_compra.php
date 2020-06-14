@@ -10,9 +10,7 @@
     $cod_producto = $_GET['Codigo'];
     $Estatus = "Pendiente";
 
-    echo $usuario;
-    echo $cod_producto;
-    echo $Estatus;
+   
 
     if($usuario=="" || $cod_producto=="" || $Estatus==""){
         echo "<center><h3>Faltan campos por llenar</h3></center>";
@@ -20,6 +18,7 @@
         $tabla_db= 'compra';
         $sql = "INSERT INTO $tabla_db (ID_vendedor,Codigo_producto,Estatus) values
          ('$usuario','$cod_producto','$Estatus')";
+         
          $query = mysqli_query($conexion,$sql);
 
 

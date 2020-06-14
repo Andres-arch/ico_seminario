@@ -80,12 +80,17 @@
                     <li class="active">
                       <a href="index.php">Inicio</a>
                     </li>
+                   
                     
                     <li class="dropwdown">
                       <a href="tabla_productos_2.php">Catalogo de productos</a>
                     </li>
                     <li class="dropdown">
                       <a href="tabla_compras.php"> Carro de Compras </i></a>
+                      </li>
+
+                       <li class="dropdown">
+                      <a href="tabla_comprastotales.php"> Historial de compras </i></a>
                       </li>
 
                    

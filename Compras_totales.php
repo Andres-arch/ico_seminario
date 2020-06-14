@@ -1,26 +1,18 @@
-<?php
+<?php 
+   include("abrir_conexion_Suscribirse.php");
+   
+    
     session_start();
-     include("abrir_conexion_Suscribirse.php");
-     if (isset($_GET['compra'])){
-      $compra = $_GET['compra'];
-      $tabla_db= 'compra';
 
-    $sql = "UPDATE $tabla_db SET Estatus='Comprado'  WHERE ID_vendedor= '$compra'";
-    $query = mysqli_query($conexion,$sql);
 
-    if ($query) {
-        echo "Compra exitosa. <a href='tabla_compras.php'>Regresar</a>";
-    } else {
-        echo "Lo sentimos su compra no fue comnpletada, el registro falló. Por favor, regrese y vuelva a intentarlo. <a href='tabla_compras.php'>Regresar</a>";
-    }
-    //------------------------------------------------
-     }
-?>
-   <html>
 
-   <head>
-    <meta charset="utf-8">
-    <title>Beatus Ille - Multipurpose bootstrap site template</title>
+  ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Beatus Ille - Multipurpose bootstrap site template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Your page description here" />
   <meta name="author" content="" />
@@ -42,7 +34,13 @@
   <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
   <link rel="shortcut icon" href="ico/favicon.png" />
 
-  </head>
+  <!-- =======================================================
+    Theme Name: Remember
+    Theme URL: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
 
 <body>
   <div id="wrapper">
@@ -75,20 +73,121 @@
             <div class="navbar navbar-static-top">
               <div class="navigation">
                 <nav>
+                 
+                 
+
                   <ul class="nav topnav">
                     <li class="active">
                       <a href="index.php">Inicio</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="tabla_compras.php"> Carro de Compras </i></a>
-                      </li>
-                    <li class="dropwdown">
+                      
+                      <li class="dropwdown">
                       <a href="tabla_productos_2.php">Catalogo de productos</a>
                     </li>
-                    <li class="dropdown">
+                       
+                      <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_compras.php"> Carro de Compras </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+                  
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Vendedor"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_compastotales_ven.php"> Historial de ventas </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Comprador"){
+                         ?>
+                      <li class="dropdown">
                       <a href="tabla_comprastotales.php"> Historial de compras </i></a>
                       </li>
-                   
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                      <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="vendedores_Admin.php"> Vendedores </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                    
+                    <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href=""> Compradores </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href=""> Compras Totales </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                    
+                   <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Vendedor"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="tabla_productos_3.php"> Articulos vendedor </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                        
+                      <?php 
+                        if(!isset($_SESSION['u_sesion'])){
+                         ?>
+                         
+                    <li class="dropdown">
+                      <a href="#"> Opciones <i class="icon-angle-down"></i></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="Suscribirse.php">Suscribirse</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                    </li>
+                    <?php 
+                        }
+                        ?>
+            
+                     
+
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
@@ -98,29 +197,42 @@
                     <li class="dropdown">
                     </li>
 
+                    
+
                     <ul class="nav topnav">
                     <li class="active">
                     </li>
+
                     <?php 
                         if(!isset($_SESSION['u_sesion'])){
                          ?>
                      <li class="dropdown">
-                      <a class="dropwdown" href="#Entrar"> Iniciar Sesion</a>
+                      <a class="dropwdown" href="Entrar.php"> Iniciar sesion</a>
                      </li>
                     <?php } else{?>
                       <li class="dropdown" href="#Entrar"> <a class="dropwdown" href="#Entrar"><?php  echo $_SESSION['u_nombre']; ?> </a>
                       </li>
                        <?php }?>
 
+  
+                    
 
-                     
+                    <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                         ?>
                       <li class="dropdown">
                       <a href="Cerrar_sesion.php"> Salir </i></a>
+                      </li>
+                         <?php 
+                        }
+                        ?>
                       
                         
                       
                        </li>
 
+
+                     
 
                     
                     
@@ -133,8 +245,7 @@
           </div>
         </div>
       </div>
-
-      </header>
+    </header>
     <!-- end header -->
 
    
@@ -177,56 +288,63 @@
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
 
-  <br>
+
  
- <center>
-   <table border="2">
- </center>
-     <tr>
-     <tr>
-     <th width="5%">Folio de compra</th>
-     <th width="5%">Producto</th>
-     <th width="5%">Precio</th>
-     <th width="5%">Imagen</th>
-     <th width="5%">Opciones</th>
-     
-     </tr>
-    
-     <?php
-        $usuario=$_SESSION['u_sesion'];
-         $resultados = mysqli_query($conexion,"SELECT Folio, Codigo,Descripcion, Precio, Imagen FROM compra INNER JOIN productos ON compra.Codigo_producto= productos.Codigo WHERE compra.Estatus='Pendiente' and compra.ID_vendedor='$usuario'");
+  <br>
+    <center>
+      <table border="1">
+        <tr>
+        <tr>
+          <th width="30%">Folio</th>
+          <th width="30%">Id vendedor</th>
+          <th width="30%">Codigo del producto</th>
+          <th width="10%">Estatus</th>
+        </tr>
+        
+        </tr>
+
+        
+      <?php
+         $tabla_db = "compra";
+         $campos = "*";
+         $resultados = mysqli_query($conexion,"SELECT $campos FROM $tabla_db");
           while($consulta = mysqli_fetch_array($resultados))
       {?>
 
-<tr>
-          <td><?php echo $consulta['Folio'];?></td>
-          <td><?php echo $consulta['Descripcion'];?></td>
-          <td><?php echo $consulta ['Precio'];?></td>
-          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="100px"></center></td>
-          <td>
-          <a href="eliminar_proceso_carrito.php?Codigo=<?php echo $consulta['Folio'];?>" class="btn btn-warning" >No comprar</a>
 
-          </td>
-</tr>
-  
-<?php
+    <tr>
+          <td><?php echo $consulta['Folio'];?></td>
+          <td><?php echo $consulta['ID_vendedor'];?></td>
+          <td><?php echo $consulta ['Codigo_producto'];?></td>
+          <td><?php echo $consulta ['Estatus'];?></td>
+    </tr>
+            
+
+
+ 
+
+
+
+        
+         
+    </td>
+          
+    </tr>
+
+    
+
+    <?php
             }
             include("cerrar_conexion_Suscribirse.php");
            ?>
         </table>
              </center>
-
-             <center>
-             <a href="?compra=<?php echo $usuario;?>"><img src="https://www.adguer.com/wp-content/uploads/2016/10/boton-paypal-compra.png" width="300"></a>
-            </center>
       
     </body>
-
-    
 </html>
 
+     
 
+</body>
 
-    
-
-    
+</html>

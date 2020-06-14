@@ -73,10 +73,16 @@
             <div class="navbar navbar-static-top">
               <div class="navigation">
                 <nav>
+                 
+                 
+
                   <ul class="nav topnav">
                     <li class="active">
                       <a href="index.php">Inicio</a>
                       
+                      <li class="dropwdown">
+                      <a href="tabla_productos_2.php">Catalogo de productos</a>
+                    </li>
                        
                       <?php 
                         if(isset($_SESSION['u_sesion'])){
@@ -95,7 +101,7 @@
                           if($_SESSION['u_rol']=="Vendedor"){
                          ?>
                       <li class="dropdown">
-                      <a href="tabla_compastotales_ven.php"> Compras Totales </i></a>
+                      <a href="tabla_compastotales_ven.php"> Historial de ventas </i></a>
                       </li>
                   <?php 
                         }
@@ -108,6 +114,42 @@
                          ?>
                       <li class="dropdown">
                       <a href="tabla_comprastotales.php"> Historial de compras </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                      <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="vendedores_Admin.php"> Vendedores </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+
+                    
+                    <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="compradores_admin.php"> Compradores </i></a>
+                      </li>
+                  <?php 
+                        }
+                      }
+                        ?>
+                  <?php 
+                        if(isset($_SESSION['u_sesion'])){
+                          if($_SESSION['u_rol']=="Administrador"){
+                         ?>
+                      <li class="dropdown">
+                      <a href="compras_totales.php"> Compras Totales </i></a>
                       </li>
                   <?php 
                         }
@@ -128,6 +170,23 @@
                         ?>
 
                         
+                      <?php 
+                        if(!isset($_SESSION['u_sesion'])){
+                         ?>
+                         
+                    <li class="dropdown">
+                      <a href="#"> Opciones <i class="icon-angle-down"></i></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="Suscribirse.php">Suscribirse</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                    </li>
+                    <?php 
+                        }
+                        ?>
+            
+                     
 
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
@@ -155,6 +214,8 @@
                       </li>
                        <?php }?>
 
+  
+                    
 
                     <?php 
                         if(isset($_SESSION['u_sesion'])){
@@ -272,13 +333,15 @@
           <td><?php echo $consulta['Descripcion'];?></td>
           <td><?php echo $consulta ['Precio'];?></td>
           <td><?php echo $consulta ['Existencia'];?></td>
-          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" width="300px"></center></td>
+          <td><center><img src="<?php echo $consulta ['Imagen'];?>" alt="" class="img-rounded" width="120px"></center></td>
           <td>
              <center>
              <?php
                         if(isset($_SESSION['u_rol'])){
                           
                           if($_SESSION['u_rol']=="Vendedor"){
+   
+                   
                           
                           ?>
 
@@ -289,9 +352,9 @@
 <?php  }else{?>
   <a href="proceso_compra.php?Codigo=<?php echo $consulta['Codigo'];?>&usuario=<?php echo  $_SESSION['u_sesion'];?>"><button>Comprar</button></a>
 <?php
+
 }
-}
-                         ?>
+}                         ?>
              </center> 
          
     </td>
