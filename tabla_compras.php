@@ -2,17 +2,34 @@
     session_start();
      include("abrir_conexion_Suscribirse.php");
      if (isset($_GET['compra'])){
-      $compra = $_GET['compra'];
-      $tabla_db= 'compra';
 
-    $sql = "UPDATE $tabla_db SET Estatus='Comprado'  WHERE ID_vendedor= '$compra'";
-    $query = mysqli_query($conexion,$sql);
+      $usuario=$_SESSION['u_sesion'];
+       $resultados = mysqli_query($conexion,"SELECT Codigo_producto FROM compra INNER JOIN productos ON compra.Codigo_producto= productos.Codigo WHERE compra.Estatus='Pendiente' and compra.ID_vendedor='$usuario'");
+        while($consulta = mysqli_fetch_array($resultados)){
+    
 
-    if ($query) {
-        echo "Compra exitosa. <a href='tabla_compras.php'>Regresar</a>";
-    } else {
-        echo "Lo sentimos su compra no fue comnpletada, el registro falló. Por favor, regrese y vuelva a intentarlo. <a href='tabla_compras.php'>Regresar</a>";
-    }
+
+        
+        $producto=$consulta['Codigo_producto'];
+        $tabla_db= 'productos';
+
+        $sql = "UPDATE $tabla_db SET Existencia=Existencia-1  WHERE Codigo= '$producto'";
+        $query = mysqli_query($conexion,$sql);
+
+          }
+          
+
+         $compra = $_GET['compra'];
+          $tabla_db= 'compra';
+
+        $sql = "UPDATE $tabla_db SET Estatus='Comprado'  WHERE ID_vendedor= '$compra'";
+        $query = mysqli_query($conexion,$sql);
+
+        if ($query) {
+            echo "Compra exitosa. <a href='tabla_compras.php'>Regresar</a>";
+        } else {
+            echo "Lo sentimos su compra no fue comnpletada, el registro falló. Por favor, regrese y vuelva a intentarlo. <a href='tabla_compras.php'>Regresar</a>";
+        }
     //------------------------------------------------
      }
 ?>
@@ -80,10 +97,10 @@
                       <a href="index.php">Inicio</a>
                     </li>
                     <li class="dropdown">
-                      <a href="tabla_compras.php"> Carro de Compras </i></a>
+                      <a href="tabla_productos_2.php"> Catalogo de productos </i></a>
                       </li>
                     <li class="dropwdown">
-                      <a href="tabla_productos_2.php">Catalogo de productos</a>
+                      <a href="tabla_compras.php">Carro de compras</a>
                     </li>
                     <li class="dropdown">
                       <a href="tabla_comprastotales.php"> Historial de compras </i></a>

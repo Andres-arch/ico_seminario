@@ -187,7 +187,9 @@
                         ?>
             
                      
-
+                     <?php 
+                        if(!isset($_SESSION['u_sesion'])){
+                         ?>
                     <li class="dropdown">
                       <a href="#"> Información <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
@@ -196,6 +198,9 @@
                     </li>
                     <li class="dropdown">
                     </li>
+                    <?php 
+                        }
+                        ?>
 
                     
 
@@ -328,7 +333,10 @@
       {?>
 
 
-    <tr>
+    <?php
+        if ($consulta ['Existencia']>0){
+    ?>
+      <tr>
           <td><?php echo $consulta['Codigo'];?></td>
           <td><?php echo $consulta['Descripcion'];?></td>
           <td><?php echo $consulta ['Precio'];?></td>
@@ -360,6 +368,7 @@
     </td>
           
     </tr>
+    <?php } ?>
 
     
 
